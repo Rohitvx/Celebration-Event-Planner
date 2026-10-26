@@ -1,0 +1,185 @@
+================================================================================
+CELEBRATION & EVENT PLANNER (CelebrationAI)
+DEPLOYED VERSION RELEASE NOTES & GENERATIVE AI SERVICES UTILIZATION REPORT
+================================================================================
+Project Repository: https://github.com/Rohitvx/Celebration-Event-Planner
+Commit Hash: c6820478251385a5d8180a4b638200ea326ceb7e
+Deployment Branch: main
+Author: Rohit Verma (GitHub: @Rohitvx)
+Local Development Server: http://localhost:5173/
+
+================================================================================
+1. OVERVIEW OF CHANGES & UPDATES MADE IN THE DEPLOYED VERSION
+================================================================================
+The deployed version represents the complete transformation from a preliminary
+placeholder repository into a production-grade, feature-complete web application:
+
+- Total Additions: 39 files, 9,517 lines of code and assets.
+- Framework & Core Stack:
+  * React 19.3 & TypeScript for type-safe state management.
+  * Vite 8.3 build system.
+  * Tailwind CSS v4 styling system with custom dark-mode aesthetics.
+  * Lucide React for consistent icons.
+  * Canvas Confetti for milestone completion micro-interactions.
+  * Google Fonts: Outfit (modern display) & Plus Jakarta Sans (readable body).
+
+Key Subsystems Implemented:
+
+1. Guided 3-Step Event Setup Wizard (src/components/wizard/EventWizard.tsx):
+   - Fast presets for Weddings, Anniversaries, Birthdays, College Fests,
+     Freshers' Parties, and Corporate Galas.
+   - Comprehensive parameters: Guest Count, INR Budget, Location, Venue Type,
+     Food Preferences (Pure Veg, Jain Available, Non-Veg, Cocktail Finger Food),
+     and Special Contingency Requirements.
+
+2. INR Financial Control & Smart Budget Planner (src/components/budget/BudgetPlanner.tsx):
+   - Dynamic 8-category allocation based on event benchmarks:
+     * Venue & Spaces
+     * Food & Catering
+     * Decor & Ambience
+     * Photography & Cinema
+     * Entertainment & DJ
+     * Invites & Favors
+     * Logistics & Transport
+     * Emergency & Miscellaneous Buffer
+   - Itemized expense table tracking Planned vs. Actual spends.
+   - Payment status management (Pending, Deposit Paid, Paid in Full).
+   - Real-time deficit warnings and category health progress gauges.
+   - 1-click AI Cost-Saving application button.
+
+3. Actionable Milestone Timeline & Task Checklist (src/components/timeline/TimelineView.tsx):
+   - Phased countdown breakdown: 30 Days Before, 14 Days Before, 7 Days Before,
+     1 Day Before, and Event Day execution.
+   - Filterable checklist (by Status and Priority).
+   - One-click template injection for Weddings, Birthdays, and College Fests.
+   - Confetti celebratory animations on task completion.
+
+4. Localized Vendor & Venue Management (src/components/vendors/VendorManager.tsx):
+   - Realistic Indian vendor database (Banquet Halls, Caterers, DJs, Decorators, Photographers).
+   - Status tracking pipeline: Inquiry -> Quote Received -> Shortlisted -> Booked -> Rejected.
+   - One-click budget synchronization that injects vendor quotes into the active expense list.
+
+5. Personalized Creative Studio (src/components/creative/CreativeStudio.tsx):
+   - Instant generation of WhatsApp Invitations, Instagram Captions & Reels Hashtags,
+     Host/Emcee Speeches, and Day-Of Schedule Timelines.
+   - Multi-tone customization (Student Hype, Royal Imperial, Emotional Heartwarming, Formal).
+   - Single-click clipboard copying with visual toast feedback.
+
+6. Event Overview & Emergency Contingency Hub (src/components/event/EventOverview.tsx):
+   - Visual hex color swatches with click-to-copy.
+   - Vibe keywords, catering suggestions, and guest experience highlights.
+   - Structured 3-tier Emergency Contingency Protocol (Weather Rain Risk,
+     Vendor Emergency Replacement Clause, and Dedicated Generator Sound Contingency).
+   - Modular section-by-section regeneration.
+
+7. Pre-Loaded Demo Showcases (src/services/storage.ts):
+   - Demo 1: "Neon Euphoria 2026" — 350-guest College Freshers' Fest (₹2,50,000 budget).
+   - Demo 2: "Royal Velvet Jubilee" — 65-guest 50th Milestone Birthday in Jaipur (₹1,20,000 budget).
+
+8. Data Resilience & Privacy (src/services/storage.ts):
+   - 100% client-side privacy using browser localStorage.
+   - Full JSON Export and Import capabilities for cross-device backup.
+   - One-click demo reload feature.
+
+================================================================================
+2. GENERATIVE AI SERVICES UTILIZED & WHERE THEY ARE UTILIZED
+================================================================================
+
+A. PRIMARY GEN AI MODEL & ARCHITECTURE
+--------------------------------------------------------------------------------
+1. Google Gemini Generative AI (gemini-1.5-flash):
+   - Endpoint: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent
+   - Integration: Direct REST API integration supporting structured JSON output
+     schema via `generationConfig: { responseMimeType: 'application/json' }`.
+   - Security: Configurable via UI settings (Stored securely in browser localStorage,
+     never logged or exposed) or via environment variable VITE_GEMINI_API_KEY.
+
+2. Dual-Engine Fallback Architecture (src/services/aiService.ts):
+   - To guarantee zero downtime, offline capability, and instant sub-400ms responses,
+     CelebrationAI features a dual-engine design.
+   - When no API key is supplied or if network limits are reached, the system
+     seamlessly shifts to an internal smart generation engine calibrated to
+     Indian celebration norms, regional cuisines, and realistic market rates.
+
+B. WHERE GENERATIVE AI IS UTILIZED IN THE APPLICATION
+--------------------------------------------------------------------------------
+Gen AI is actively utilized across five (5) critical modules of the project:
+
+1. End-to-End Event Plan Synthesis (src/services/aiService.ts -> generateEventPlan)
+   - Where: Invoked directly from the Event Creation Wizard (src/components/wizard/EventWizard.tsx).
+   - What it does: Takes user constraints (event type, guest count, INR budget,
+     location, theme, decor style, food preference, and special requirements) and
+     generates a complete structured master plan containing:
+     * Concept Title & Narrative Vibe Summary
+     * Harmonious 4-color palette with hex codes
+     * Tailored catering recommendations (e.g., Live Chaat, Awadhi Dum Biryani,
+       or Cocktail Sliders based on selected dietary preferences)
+     * Curated entertainment and live performance ideas
+     * Guest experience touchpoints (e.g., 360-degree slow-mo video booths,
+       QR-code memory galleries)
+     * Risk mitigation contingencies (weather, sound permits, vendor backups)
+     * Master day-of hourly run-down schedule
+
+2. Context-Aware Conversational Event Assistant (src/services/aiService.ts -> chatWithAssistant)
+   - Where: Accessible directly on the main Dashboard (src/components/dashboard/DashboardOverview.tsx).
+   - What it does: An interactive conversational agent that possesses full contextual
+     awareness of the currently active event's title, guest count, location, venue type,
+     and total INR budget. Users can ask questions like:
+     * "How can I cut 15% from my budget without ruining guest experience?"
+     * "What decor theme works best for an outdoor lawn in November?"
+     * "What should my sound and photography timeline look like?"
+     The assistant calculates per-guest metrics and provides mathematical and
+     logistical recommendations in real time.
+
+3. Granular Section-by-Section Refinement (src/services/aiService.ts -> refineSection)
+   - Where: Located inside the Concept, Catering, Entertainment, and Contingency
+     cards in Event Overview (src/components/event/EventOverview.tsx).
+   - What it does: Allows organizers to prompt the AI to regenerate or pivot a single
+     aspect (e.g., "Make catering pure veg royal Rajasthani" or "Suggest budget-friendly
+     entertainment") without wiping out or modifying the rest of their budget or timeline.
+
+4. Smart Financial Cost-Saving Optimization (src/services/aiService.ts -> costSavingTips)
+   - Where: Featured prominently inside the Budget Planner (src/components/budget/BudgetPlanner.tsx).
+   - What it does: Analyzes current planned expenditures against the total budget
+     and outputs actionable cost-reduction strategies with exact estimated INR savings
+     (e.g., "Optimize guest RSVP 5 days prior to reduce food buffer from 15% to 5% —
+     estimated savings ₹18,000").
+   - Actionability: Includes a 1-click "Apply Savings" button that automatically
+     updates the corresponding expense line item and updates the financial health score.
+
+5. Personalized Creative Studio Asset Generation (src/services/aiService.ts -> generateStarterCreatives)
+   - Where: Inside Creative Studio (src/components/creative/CreativeStudio.tsx).
+   - What it does: Synthesizes high-conversion, ready-to-use digital assets:
+     * WhatsApp Invitations with custom emoji formatting, dress codes, and RSVP links.
+     * Instagram Reels captions and trending hashtags tailored to the event vibe.
+     * Host and Emcee welcome speeches with tone modulation (Student Hype,
+       Royal Imperial, Heartwarming Family, or Corporate Formal).
+     * Catchy event monikers and day-of hourly schedules.
+   - Features: One-click clipboard copy with immediate visual feedback.
+
+================================================================================
+3. SUMMARY TABLE: GEN AI UTILIZATION MATRIX
+================================================================================
+Module / Component          | Gen AI Capability           | Input / Trigger
+----------------------------+-----------------------------+-----------------------------
+Event Wizard                | Master Concept & Strategy   | Guest count, Budget, Location,
+(EventWizard.tsx)           | Synthesis (JSON schema)     | Theme, Dietary preferences
+----------------------------+-----------------------------+-----------------------------
+Interactive Dashboard Chat  | Conversational Consultant   | Natural language chat with
+(DashboardOverview.tsx)     | with Event Memory Context   | live event state awareness
+----------------------------+-----------------------------+-----------------------------
+Event Overview Hub          | Modular Section Refinement  | Quick prompts for Concept,
+(EventOverview.tsx)         | (Concept, Menu, Backup)     | Catering, DJ, or Contingency
+----------------------------+-----------------------------+-----------------------------
+Budget Planner              | Cost-Saving Optimizer &     | Allocation gap analysis &
+(BudgetPlanner.tsx)         | Dynamic INR Adjuster        | 1-click expense reduction
+----------------------------+-----------------------------+-----------------------------
+Creative Studio             | Multi-tone Copywriting for  | Tone selection & custom
+(CreativeStudio.tsx)        | Invites, Speeches, Captions | prompts with 1-click copy
+--------------------------------------------------------------------------------
+
+================================================================================
+Generated for: Rohit Verma (Rohitvx)
+Repository: https://github.com/Rohitvx/Celebration-Event-Planner
+Date: October 26, 2026
+================================================================================
