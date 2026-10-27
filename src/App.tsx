@@ -61,7 +61,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0b0c14] text-slate-100 font-sans selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#0b0c14] text-slate-100 font-sans selection:bg-purple-600 selection:text-white overflow-x-clip w-full max-w-full">
       {/* Navbar */}
       <Navbar
         activeTab={activeTab}
@@ -73,7 +73,7 @@ export function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-6 min-w-0">
         {activeTab === 'landing' && (
           <LandingPage
             onOpenWizard={() => setIsWizardOpen(true)}
